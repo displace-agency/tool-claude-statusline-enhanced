@@ -11,7 +11,7 @@ input=$(cat)
 
 # ── Extract all values in a single jq call (bash 3.2 compatible) ─────────────
 _jq_out=$(echo "$input" | jq -r '
-    .workspace.current_dir // "",
+    (.cwd // .workspace.current_dir // ""),
     .model.display_name // "",
     .transcript_path // "",
     (.context_window.total_input_tokens // 0 | floor | tostring),
